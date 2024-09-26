@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addUser } from "../store/userSlice";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   const handleSubmit = async () => {
     const res = await axios.post(
@@ -15,8 +18,9 @@ function Login() {
       { withCredentials: true } //allow you to send the cookie back for further request
     );
     if (res.status === 200) {
-      setEmail("");
-      setPassword("");
+      dispatch(addUser(res.data.data));
+      // setEmail("");
+      // setPassword("");
     }
   };
 
