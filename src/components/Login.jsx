@@ -2,25 +2,31 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/userSlice";
+import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    const res = await axios.post(
-      "http://localhost:7777/login",
-      {
-        email,
-        password,
-      },
-      { withCredentials: true } //allow you to send the cookie back for further request
-    );
-    if (res.status === 200) {
-      dispatch(addUser(res.data.data));
-      setEmail("");
-      setPassword("");
+    try {
+      const res = await axios.post(
+        `${BASE_URL}/login`,
+        {
+          email,
+          password,
+        },
+        { withCredentials: true } //allow you to send the cookie back for further request
+      );
+      if (res.status === 200) {
+        dispatch(addUser(res.data.data));
+        navigate("/");
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
