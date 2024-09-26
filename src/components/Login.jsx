@@ -19,8 +19,8 @@ function Login() {
     );
     if (res.status === 200) {
       dispatch(addUser(res.data.data));
-      // setEmail("");
-      // setPassword("");
+      setEmail("");
+      setPassword("");
     }
   };
 
