@@ -8,6 +8,7 @@ import { BASE_URL } from "../utils/constants";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ function Login() {
         navigate("/");
       }
     } catch (err) {
-      console.error(err);
+      setError(err.response.data.message);
     }
   };
 
@@ -34,6 +35,11 @@ function Login() {
     <div className="flex my-10 justify-center">
       <div className="card bg-base-300 w-96 shadow-xl">
         <div className="card-body">
+          {error && (
+            <p className="flex justify-center font-bold text-red-600 my-4">
+              {error}
+            </p>
+          )}
           <h2 className="card-title justify-center text-2xl font-bold">
             Login
           </h2>
@@ -53,6 +59,7 @@ function Login() {
               type="text"
               className="grow"
               placeholder="Email"
+              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -76,6 +83,7 @@ function Login() {
               type="password"
               className="grow"
               placeholder="password"
+              required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
