@@ -20,7 +20,7 @@ function Body() {
         const res = await axios.get(`${BASE_URL}/profile/view`, {
           withCredentials: true,
         });
-        console.log(res);
+
         if (res.status === 200) {
           dispatch(addUser(res.data.data));
         }
@@ -30,7 +30,7 @@ function Body() {
       }
     };
     fetchUser();
-  }, [dispatch, navigate]);
+  }, [dispatch, navigate, user]);
 
   return (
     <div>

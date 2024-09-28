@@ -35,7 +35,7 @@ function Feed() {
     return <Loader />;
   }
   return (
-    <div className="flex justify-center my-10">
+    <div className="flex justify-center my-6">
       {feed.map((user) => (
         <UsersCard key={user._id} user={user} />
       ))}
