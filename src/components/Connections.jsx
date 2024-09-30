@@ -5,22 +5,29 @@ import { BASE_URL } from "../utils/constants";
 import { addConnections } from "../store/connectionSlice";
 import ConnectionCard from "./ConnectionCard";
 import Loader from "./Loader";
+import { useNavigate } from "react-router-dom";
 
 function Connections() {
   const dispatch = useDispatch();
   const connections = useSelector((store) => store.connections);
-  console.log(connections);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchConnections = async () => {
-      const res = await axios.get(`${BASE_URL}/user/connections`, {
-        withCredentials: true,
-      });
-
-      dispatch(addConnections(res.data.data));
+      try {
+        const res = await axios.get(`${BASE_URL}/user/connections`, {
+          withCredentials: true,
+        });
+        if (res.status === 200) {
+          dispatch(addConnections(res.data.data));
+        }
+      } catch (err) {
+        console.log(err.message);
+        navigate("/error");
+      }
     };
     fetchConnections();
-  }, [dispatch]);
+  }, [dispatch, navigate]);
   if (!connections) {
     return <Loader />;
   }
@@ -33,11 +40,11 @@ function Connections() {
     </div>;
   }
   return (
-    <div className=" my-10">
+    <div className="my-10">
       <h1 className="text-3xl  text-center font-extrabold">Connections</h1>
       <div>
-        {connections.map((user, i) => (
-          <ConnectionCard key={i} user={user} />
+        {connections.map((user) => (
+          <ConnectionCard key={user._id} user={user} />
         ))}
       </div>
     </div>
