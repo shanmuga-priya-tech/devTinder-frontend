@@ -34,12 +34,16 @@ function Feed() {
   if (!feed) {
     return <Loader />;
   }
+  if (feed.length === 0) {
+    return (
+      <h1 className="flex justify-center text-3xl font-bold my-10">
+        No new users found!
+      </h1>
+    );
+  }
   return (
     <div className="flex justify-center my-6">
-      {feed.map((user) => (
-        <UsersCard key={user._id} user={user} />
-      ))}
-      {/* <UsersCard user={feed[0]} /> */}
+      <UsersCard user={feed[0]} />
     </div>
   );
 }
