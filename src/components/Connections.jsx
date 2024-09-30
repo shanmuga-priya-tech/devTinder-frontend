@@ -28,16 +28,19 @@ function Connections() {
     };
     fetchConnections();
   }, [dispatch, navigate]);
+
   if (!connections) {
     return <Loader />;
   }
 
   if (connections.length === 0) {
-    <div className="flex justify-center my-10">
-      <h1 className="text-3xl font-extrabold text-gray-300">
-        No connection found!
-      </h1>
-    </div>;
+    return (
+      <div className="flex justify-center my-10">
+        <h1 className="text-3xl font-extrabold text-gray-300">
+          No connection found!
+        </h1>
+      </div>
+    );
   }
   return (
     <div className="my-10">

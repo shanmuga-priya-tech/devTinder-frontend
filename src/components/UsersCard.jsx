@@ -6,6 +6,7 @@ import { removeUserFromFeed } from "../store/feedSlice";
 
 function UsersCard({ user }) {
   const { _id, firstName, lastName, gender, age, about, photoURL } = user;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -16,9 +17,7 @@ function UsersCard({ user }) {
         {},
         { withCredentials: true }
       );
-      if (res.status === 200) {
-        dispatch(removeUserFromFeed(userId));
-      }
+      dispatch(removeUserFromFeed(userId));
     } catch (err) {
       console.log(err.message);
       navigate("/error");
