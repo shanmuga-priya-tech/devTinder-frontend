@@ -19,7 +19,7 @@ function Connections() {
           withCredentials: true,
         });
         if (res.status === 200) {
-          dispatch(addConnections(res.data.data));
+          dispatch(addConnections(res?.data?.data));
         }
       } catch (err) {
         console.log(err.message);

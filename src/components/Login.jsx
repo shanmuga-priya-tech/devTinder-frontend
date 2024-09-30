@@ -6,13 +6,32 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 function Login() {
-  const [email, setEmail] = useState("devTinder123@gmail.com");
-  const [password, setPassword] = useState("devTinder@12");
+  const [isLogin, setIsLogin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = async () => {
+  const handleSignUp = async () => {
+    try {
+      const res = await axios.post(
+        `${BASE_URL}/signup`,
+        { firstName, lastName, email, password },
+        { withCredentials: true }
+      );
+      if (res.status === 200) {
+        dispatch(addUser(res.data.data));
+        navigate("/profile");
+      }
+    } catch (err) {
+      setError(err?.response?.data?.message);
+    }
+  };
+
+  const handleLogin = async () => {
     try {
       const res = await axios.post(
         `${BASE_URL}/login`,
@@ -28,7 +47,6 @@ function Login() {
       }
     } catch (err) {
       setError(err?.response?.data?.message);
-      console.log(err);
     }
   };
 
@@ -42,8 +60,34 @@ function Login() {
             </p>
           )}
           <h2 className="card-title justify-center text-2xl font-bold">
-            Login
+            {isLogin ? "Login" : "SignUp"}
           </h2>
+
+          {!isLogin && (
+            <>
+              {" "}
+              <label className="my-1 font-bold text-lg">FirstName:</label>
+              <label className="input input-bordered flex items-center gap-2">
+                <input
+                  type="text"
+                  className="grow"
+                  required
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </label>
+              <label className="my-1 font-bold text-lg">LastName:</label>
+              <label className="input input-bordered flex items-center gap-2">
+                <input
+                  type="text"
+                  className="grow"
+                  required
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </label>
+            </>
+          )}
 
           <label className="my-1 font-bold text-lg">Email ID:</label>
           <label className="input input-bordered flex items-center gap-2">
@@ -91,10 +135,19 @@ function Login() {
           </label>
 
           <div className="card-actions justify-center mt-4">
-            <button className="btn btn-primary" onClick={handleSubmit}>
-              Login
+            <button
+              className="btn btn-primary"
+              onClick={isLogin ? handleLogin : handleSignUp}
+            >
+              {isLogin ? "Login" : "SignUp"}
             </button>
           </div>
+          <p
+            className=" justify-center underline cursor-pointer mx-auto"
+            onClick={() => setIsLogin((value) => !value)}
+          >
+            {isLogin ? "New user? SignUp" : "Already registered ? Login"}
+          </p>
         </div>
       </div>
     </div>

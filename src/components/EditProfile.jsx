@@ -20,20 +20,21 @@ function EditProfile() {
   const dispatch = useDispatch();
 
   const handleUpdate = async () => {
+    setError("");
     try {
       const res = await axios.patch(
         `${BASE_URL}/profile/edit`,
         { firstName, lastName, age, gender, about, photoURL },
         { withCredentials: true }
       );
-      if (res.status === 200) {
-        dispatch(addUser(res.data.data));
-        setError("");
-        setShowToast(true);
-        setTimeout(() => {
-          setShowToast(false);
-        }, 2000);
-      }
+
+      dispatch(addUser(res?.data?.data));
+      console.log(res.data.data);
+
+      setShowToast(true);
+      setTimeout(() => {
+        setShowToast(false);
+      }, 2000);
     } catch (err) {
       setError(err?.response?.data?.message);
     }
