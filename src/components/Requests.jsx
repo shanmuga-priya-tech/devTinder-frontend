@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { BASE_URL } from "../utils/constants";
+
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../store/reqSlice";
 import Loader from "./Loader";
@@ -14,7 +14,7 @@ function Requests() {
   const reviewRequest = async (status, id) => {
     try {
       const res = await axios.post(
-        `${BASE_URL}/request/review/${status}/${id}`,
+        `${import.meta.env.VITE_BASE_URL}/request/review/${status}/${id}`,
         {},
         { withCredentials: true }
       );
@@ -29,9 +29,12 @@ function Requests() {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const res = await axios.get(`${BASE_URL}/user/requests/received`, {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/user/requests/received`,
+          {
+            withCredentials: true,
+          }
+        );
         dispatch(addRequests(res.data.data));
       } catch {
         navigate("/error");

@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/userSlice";
 import { useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils/constants";
 
 function Login() {
   const [isLogin, setIsLogin] = useState(false);
@@ -18,7 +17,7 @@ function Login() {
   const handleSignUp = async () => {
     try {
       const res = await axios.post(
-        `${BASE_URL}/signup`,
+        `${import.meta.env.VITE_BASE_URL}/signup`,
         { firstName, lastName, email, password },
         { withCredentials: true }
       );
@@ -34,7 +33,7 @@ function Login() {
   const handleLogin = async () => {
     try {
       const res = await axios.post(
-        `${BASE_URL}/login`,
+        `${import.meta.env.VITE_BASE_URL}/login`,
         {
           email,
           password,

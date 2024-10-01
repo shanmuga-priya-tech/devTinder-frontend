@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import UsersCard from "../components/UsersCard";
 import Loader from "../components/Loader";
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
+
 import { addUser } from "../store/userSlice";
 
 function EditProfile() {
@@ -23,7 +23,7 @@ function EditProfile() {
     setError("");
     try {
       const res = await axios.patch(
-        `${BASE_URL}/profile/edit`,
+        `${import.meta.env.VITE_BASE_URL}/profile/edit`,
         { firstName, lastName, age, gender, about, photoURL },
         { withCredentials: true }
       );

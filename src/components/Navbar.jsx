@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils/constants";
+
 import { removeUser } from "../store/userSlice";
 
 function Navbar() {
@@ -11,7 +11,11 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await axios.post(`${BASE_URL}/logout`, {}, { withCredentials: true });
+      await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/logout`,
+        {},
+        { withCredentials: true }
+      );
       //if logged out successfully remove the user from store and redirect to login page
       dispatch(removeUser());
       navigate("/login");

@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
+
 import { addUser } from "../store/userSlice";
 
 function Body() {
@@ -19,9 +19,12 @@ function Body() {
         if (user) return;
         // Only fetch if it's not the forget password route
         if (location.pathname === "/forgetpassword") return;
-        const res = await axios.get(`${BASE_URL}/profile/view`, {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/profile/view`,
+          {
+            withCredentials: true,
+          }
+        );
 
         if (res.status === 200) {
           dispatch(addUser(res.data.data));

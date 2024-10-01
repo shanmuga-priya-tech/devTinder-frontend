@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL } from "../utils/constants";
+
 import { addConnections } from "../store/connectionSlice";
 import ConnectionCard from "./ConnectionCard";
 import Loader from "./Loader";
@@ -15,9 +15,12 @@ function Connections() {
   useEffect(() => {
     const fetchConnections = async () => {
       try {
-        const res = await axios.get(`${BASE_URL}/user/connections`, {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_BASE_URL}/user/connections`,
+          {
+            withCredentials: true,
+          }
+        );
         if (res.status === 200) {
           dispatch(addConnections(res?.data?.data));
         }
