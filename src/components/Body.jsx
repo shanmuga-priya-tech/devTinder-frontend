@@ -17,6 +17,8 @@ function Body() {
     const fetchUser = async () => {
       try {
         if (user) return;
+        // Only fetch if it's not the forget password route
+        if (location.pathname === "/forgetpassword") return;
         const res = await axios.get(`${BASE_URL}/profile/view`, {
           withCredentials: true,
         });
@@ -25,7 +27,10 @@ function Body() {
           dispatch(addUser(res.data.data));
         }
       } catch {
-        navigate("/login");
+        // Redirect to login only if it's not the forget password route
+        if (location.pathname !== "/forgetpassword") {
+          navigate("/login");
+        }
       }
     };
     fetchUser();
