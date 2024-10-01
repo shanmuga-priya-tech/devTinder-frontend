@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../store/userSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
 function Login() {
@@ -133,11 +133,6 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
-          {isLogin && (
-            <Link className="underline flex justify-end" to="/forgetpassword">
-              Forget password? click here
-            </Link>
-          )}
 
           <div className="card-actions justify-center mt-4">
             <button
