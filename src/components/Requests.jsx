@@ -21,8 +21,7 @@ function Requests() {
       if (res.status === 200) {
         dispatch(removeRequest(id));
       }
-    } catch (err) {
-      console.log(err.message);
+    } catch {
       navigate("/error");
     }
   };
@@ -34,8 +33,7 @@ function Requests() {
           withCredentials: true,
         });
         dispatch(addRequests(res.data.data));
-      } catch (err) {
-        console.log(err.message);
+      } catch {
         navigate("/error");
       }
     };

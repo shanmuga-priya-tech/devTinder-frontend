@@ -29,7 +29,6 @@ function EditProfile() {
       );
 
       dispatch(addUser(res?.data?.data));
-      console.log(res.data.data);
 
       setShowToast(true);
       setTimeout(() => {

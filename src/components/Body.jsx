@@ -24,8 +24,7 @@ function Body() {
         if (res.status === 200) {
           dispatch(addUser(res.data.data));
         }
-      } catch (err) {
-        console.log(err);
+      } catch {
         navigate("/login");
       }
     };

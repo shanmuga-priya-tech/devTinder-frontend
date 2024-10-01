@@ -15,9 +15,8 @@ function Navbar() {
       //if logged out successfully remove the user from store and redirect to login page
       dispatch(removeUser());
       navigate("/login");
-    } catch (err) {
+    } catch {
       navigate("/error");
-      console.log(err.message);
     }
   };
 
