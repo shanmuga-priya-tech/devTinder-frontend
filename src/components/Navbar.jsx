@@ -30,10 +30,10 @@ function Navbar() {
       </div>
       {user && (
         <div className="flex-none gap-1 ">
-          <div className="form-control font-bold">
+          <div className="form-control md:font-bold">
             Welcome, {user.firstName}
           </div>
-          <div className="dropdown dropdown-end mx-5">
+          <div className="dropdown dropdown-end md:mx-5">
             <div
               tabIndex={0}
               role="button"
