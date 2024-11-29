@@ -57,46 +57,48 @@ function Requests() {
     <div className="text-center my-10">
       <h1 className="text-bold text-white text-3xl">Connection Requests</h1>
 
-      {requests.map((request) => {
-        const { _id, firstName, lastName, photoURL, age, gender, about } =
-          request.fromUserId;
+      {requests
+        .filter((request) => request.fromUserId !== null) // Filter out null fromUserId
+        .map((request) => {
+          const { _id, firstName, lastName, photoURL, age, gender, about } =
+            request.fromUserId;
 
-        return (
-          <div
-            key={_id}
-            className=" flex justify-between items-center m-4 p-4 rounded-lg bg-base-300  mx-auto  md:w-1/2"
-          >
-            <div>
-              <img
-                alt="photo"
-                className="md:w-36 md:h-28 md:rounded-full"
-                src={photoURL}
-              />
+          return (
+            <div
+              key={_id}
+              className=" flex justify-between items-center m-4 p-4 rounded-lg bg-base-300  mx-auto  md:w-1/2"
+            >
+              <div>
+                <img
+                  alt="photo"
+                  className="md:w-36 md:h-28 md:rounded-full"
+                  src={photoURL}
+                />
+              </div>
+              <div className="text-left mx-4">
+                <h2 className="font-bold text-xl">
+                  {firstName + " " + lastName}
+                </h2>
+                {age && gender && <p>{age + ", " + gender}</p>}
+                <p className="text-sm md:text-xl">{about}</p>
+              </div>
+              <div className="md:flex ">
+                <button
+                  className="btn btn-primary mx-2"
+                  onClick={() => reviewRequest("rejected", request._id)}
+                >
+                  Reject
+                </button>
+                <button
+                  className="btn btn-secondary mx-2"
+                  onClick={() => reviewRequest("accepted", request._id)}
+                >
+                  Accept
+                </button>
+              </div>
             </div>
-            <div className="text-left mx-4">
-              <h2 className="font-bold text-xl">
-                {firstName + " " + lastName}
-              </h2>
-              {age && gender && <p>{age + ", " + gender}</p>}
-              <p className="text-sm md:text-xl">{about}</p>
-            </div>
-            <div className="md:flex ">
-              <button
-                className="btn btn-primary mx-2"
-                onClick={() => reviewRequest("rejected", request._id)}
-              >
-                Reject
-              </button>
-              <button
-                className="btn btn-secondary mx-2"
-                onClick={() => reviewRequest("accepted", request._id)}
-              >
-                Accept
-              </button>
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </div>
   );
 }
