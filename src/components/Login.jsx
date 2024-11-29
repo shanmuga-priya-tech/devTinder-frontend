@@ -132,6 +132,14 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
+          {isLogin && (
+            <p
+              className="flex justify-end mb-2 underline cursor-pointer "
+              onClick={() => navigate("/forgotpassword")}
+            >
+              Forget password?click here
+            </p>
+          )}
 
           <div className="card-actions justify-center mt-4">
             <button

@@ -9,6 +9,7 @@ import Feed from "./components/Feed";
 import Error from "./components/Error";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
+import ForgotPassword from "./components/forgotPassword";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
               <Route path="/requests" element={<Requests />} />
               <Route path="/error" element={<Error />} />
             </Route>
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
           </Routes>
         </BrowserRouter>
       </Provider>
