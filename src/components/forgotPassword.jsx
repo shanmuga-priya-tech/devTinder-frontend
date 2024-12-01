@@ -10,7 +10,7 @@ function ForgotPassword() {
   const sendEmail = async () => {
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/forgotPassword`,
+        `${import.meta.env.VITE_BASE_URL}/forgotpassword`,
         { email },
         { withCredentials: true }
       );

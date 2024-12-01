@@ -38,7 +38,7 @@ function ResetPassword() {
       <Navbar />
       <div className="my-20 mx-auto max-w-xl">
         <h1 className="text-blue-800 font-extrabold text-xl text-center mb-10">
-          Forgot Password
+          Reset Password
         </h1>
         <label className="my-1 font-bold text-lg">Password:</label>
         <label className="input input-bordered flex items-center gap-2 mb-6 mt-2">
