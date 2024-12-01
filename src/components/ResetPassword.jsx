@@ -6,16 +6,12 @@ import { useNavigate, useParams } from "react-router-dom";
 function ResetPassword() {
   const navigate = useNavigate();
   const { resetToken } = useParams(); // Extract resetToken from URL
-  console.log(resetToken);
+
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [error, setError] = useState("");
 
   const resetPassword = async () => {
-    if (password !== passwordConfirm) {
-      setError("Passwords do not match");
-      return;
-    }
     try {
       const res = await axios.patch(
         `${import.meta.env.VITE_BASE_URL}/resetpassword/${resetToken}`,
