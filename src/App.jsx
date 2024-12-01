@@ -10,6 +10,7 @@ import Error from "./components/Error";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import ForgotPassword from "./components/forgotPassword";
+import ResetPassword from "./components/ResetPassword";
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
               <Route path="/error" element={<Error />} />
             </Route>
             <Route path="/forgotpassword" element={<ForgotPassword />} />
+            <Route
+              path="/resetpassword/:resetToken"
+              element={<ResetPassword />}
+            />
           </Routes>
         </BrowserRouter>
       </Provider>
