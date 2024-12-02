@@ -32,6 +32,7 @@ function App() {
               path="/resetpassword/:resetToken"
               element={<ResetPassword />}
             />
+            <Route path="*" element={<Error />} />
           </Routes>
         </BrowserRouter>
       </Provider>
