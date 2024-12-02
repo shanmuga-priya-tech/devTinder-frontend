@@ -35,7 +35,7 @@ function EditProfile() {
         setShowToast(false);
       }, 2000);
     } catch (err) {
-      setError(err?.response?.data?.message);
+      setError(err?.response?.data?.message || "⚠️ Somethinng went wrong!");
     }
   };
 
