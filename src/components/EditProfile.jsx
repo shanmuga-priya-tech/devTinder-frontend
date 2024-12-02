@@ -9,12 +9,12 @@ import { addUser } from "../store/userSlice";
 function EditProfile() {
   //getting user data to prefill the form
   const user = useSelector((store) => store.user);
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [age, setAge] = useState(user.age || "");
-  const [gender, setGender] = useState(user.gender || "");
-  const [about, setAbout] = useState(user.about);
-  const [photoURL, setPhotoURL] = useState(user.photoURL);
+  const [firstName, setFirstName] = useState(user?.firstName);
+  const [lastName, setLastName] = useState(user?.lastName);
+  const [age, setAge] = useState(user?.age || "");
+  const [gender, setGender] = useState(user?.gender || "");
+  const [about, setAbout] = useState(user?.about);
+  const [photoURL, setPhotoURL] = useState(user?.photoURL);
   const [error, setError] = useState(null);
   const [showToast, setShowToast] = useState(false);
   const dispatch = useDispatch();
@@ -35,11 +35,12 @@ function EditProfile() {
         setShowToast(false);
       }, 2000);
     } catch (err) {
-      setError(err?.response?.data?.message || "⚠️ Somethinng went wrong!");
+      setError(err?.response?.data?.message || "⚠️ Something went wrong!");
     }
   };
 
   if (!user) return <Loader />;
+
   return (
     <>
       <div className="flex flex-col md:flex-row">

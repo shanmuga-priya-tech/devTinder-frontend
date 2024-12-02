@@ -22,7 +22,7 @@ function ForgotPassword() {
         }, 4000);
       }
     } catch (err) {
-      setError(err?.response?.data?.message || "⚠️ Somethinng went wrong!");
+      setError(err?.response?.data?.message || "⚠️ Something went wrong!");
     }
   };
 

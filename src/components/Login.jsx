@@ -26,7 +26,7 @@ function Login() {
         navigate("/profile");
       }
     } catch (err) {
-      setError(err?.response?.data?.message || "⚠️ Somethinng went wrong!");
+      setError(err?.response?.data?.message || "⚠️ Something went wrong!");
     }
   };
 
@@ -45,7 +45,7 @@ function Login() {
         navigate("/");
       }
     } catch (err) {
-      setError(err?.response?.data?.message || "⚠️ Somethinng went wrong!");
+      setError(err?.response?.data?.message || "⚠️ Something went wrong!");
     }
   };
 
