@@ -1,6 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
@@ -15,10 +14,17 @@ function Body() {
 
   useEffect(() => {
     const fetchUser = async () => {
+      const publicRoutes = [
+        "/forgetpassword",
+        "/privacypolicy",
+        "/termsandcondition",
+        "/contactus",
+      ];
       try {
         if (user) return;
         // Only fetch if it's not the forget password route
-        if (location.pathname === "/forgetpassword") return;
+        if (publicRoutes.includes(location.pathname)) return;
+
         const res = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/profile/view`,
           {
@@ -31,7 +37,7 @@ function Body() {
         }
       } catch {
         // Redirect to login only if it's not the forget password route
-        if (location.pathname !== "/forgetpassword") {
+        if (!publicRoutes.includes(location.pathname)) {
           navigate("/login");
         }
       }
@@ -43,7 +49,6 @@ function Body() {
     <div>
       <Navbar />
       <Outlet />
-      <Footer />
     </div>
   );
 }

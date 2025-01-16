@@ -11,6 +11,11 @@ import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import ForgotPassword from "./components/forgotPassword";
 import ResetPassword from "./components/ResetPassword";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import TermsandCondition from "./components/TermsandCondition";
+import Cancellation from "./components/Cancellation";
+import ShippingandDelivery from "./components/ShippingandDelivery";
+import Contact from "./components/contact";
 
 function App() {
   return (
@@ -32,6 +37,11 @@ function App() {
               path="/resetpassword/:resetToken"
               element={<ResetPassword />}
             />
+            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+            <Route path="/termsandcondition" element={<TermsandCondition />} />
+            <Route path="/cancellationpolicy" element={<Cancellation />} />
+            <Route path="/shippingpolicy" element={<ShippingandDelivery />} />
+            <Route path="/contactus" element={<Contact />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </BrowserRouter>

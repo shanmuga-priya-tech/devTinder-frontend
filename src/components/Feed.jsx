@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import UserCard from "./UsersCard";
 import { useNavigate } from "react-router-dom";
 import Loader from "./Loader";
+import FooterMini from "./FooterMini";
 
 const Feed = () => {
   const feed = useSelector((store) => store.feed);
@@ -38,9 +39,12 @@ const Feed = () => {
 
   return (
     feed && (
-      <div className="flex justify-center my-10">
-        <UserCard user={feed[0]} />
-      </div>
+      <>
+        <div className="flex justify-center my-10">
+          <UserCard user={feed[0]} />
+        </div>
+        <FooterMini />
+      </>
     )
   );
 };
