@@ -5,70 +5,63 @@ import { createSocketConnection } from "../utils/socket";
 
 function Chat() {
   const [msg, setMsg] = useState("");
-  const receiverId = useParams();
+  const [messages, setMessages] = useState([]);
+  const { receiverId } = useParams();
   const user = useSelector((store) => store.user);
   const userId = user?._id;
 
   //create socket connection as soon as the component loads
   useEffect(() => {
+    if (!user) return;
     const socket = createSocketConnection();
 
     //emit a event to join a chat
-    socket.emit("joinChat", { firstName: user.firstName, userId, receiverId });
+    socket.emit("joinChat", { firstName: user?.firstName, userId, receiverId });
+
+    //listening up the event got from backend
+    socket.on("messageReceived", ({ firstName, profilepic, msg }) => {
+      setMessages((msgs) => [...msgs, { firstName, profilepic, msg }]);
+    });
 
     //disconnect the socket connection when there is not of  use
     return () => {
       socket.disconnect();
     };
-  }, [userId, receiverId, user.firstName]);
+  }, [userId, receiverId, user?.firstName, user]);
 
   //fn to send a msg
   const sendMessage = () => {
     const socket = createSocketConnection();
     socket.emit("sendMessage", {
-      firstName: user.firstName,
+      firstName: user?.firstName,
+      profilepic: user?.photoURL,
       userId,
       receiverId,
       msg,
     });
+    setMsg("");
   };
 
   return (
     <div className="flex items-center justify-center h-screen ">
       <div className="flex flex-col w-96 h-[600px] border  rounded-lg ">
         <div className="flex-1 p-4 overflow-y-auto border-b ">
-          <div className="chat chat-start">
-            <div className="chat-image avatar">
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS chat bubble component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
+          {messages.map((chat, i) => (
+            <div key={i}>
+              <div className="chat chat-start">
+                <div className="chat-image avatar">
+                  <div className="w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS chat bubble component"
+                      src={chat.profilepic}
+                    />
+                  </div>
+                </div>
+                <div className="chat-header">{chat.firstName}</div>
+                <div className="chat-bubble">{chat.msg}</div>
               </div>
             </div>
-            <div className="chat-header">
-              Obi-Wan Kenobi
-              <time className="text-xs opacity-50">12:45</time>
-            </div>
-            <div className="chat-bubble">You were the Chosen One!</div>
-            <div className="chat-footer opacity-50">Delivered</div>
-          </div>
-          <div className="chat chat-end">
-            <div className="chat-image avatar">
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS chat bubble component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                />
-              </div>
-            </div>
-            <div className="chat-header">
-              Anakin
-              <time className="text-xs opacity-50">12:46</time>
-            </div>
-            <div className="chat-bubble">I hate you!</div>
-            <div className="chat-footer opacity-50">Seen at 12:46</div>
-          </div>
+          ))}
         </div>
 
         <div className="flex items-center p-4 border-t border-gray-300">
