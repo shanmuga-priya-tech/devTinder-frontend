@@ -1,10 +1,38 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { createSocketConnection } from "../utils/socket";
 
 function Chat() {
+  const [msg, setMsg] = useState("");
   const receiverId = useParams();
   const user = useSelector((store) => store.user);
   const userId = user?._id;
+
+  //create socket connection as soon as the component loads
+  useEffect(() => {
+    const socket = createSocketConnection();
+
+    //emit a event to join a chat
+    socket.emit("joinChat", { firstName: user.firstName, userId, receiverId });
+
+    //disconnect the socket connection when there is not of  use
+    return () => {
+      socket.disconnect();
+    };
+  }, [userId, receiverId, user.firstName]);
+
+  //fn to send a msg
+  const sendMessage = () => {
+    const socket = createSocketConnection();
+    socket.emit("sendMessage", {
+      firstName: user.firstName,
+      userId,
+      receiverId,
+      msg,
+    });
+  };
+
   return (
     <div className="flex items-center justify-center h-screen ">
       <div className="flex flex-col w-96 h-[600px] border  rounded-lg ">
@@ -45,11 +73,16 @@ function Chat() {
 
         <div className="flex items-center p-4 border-t border-gray-300">
           <input
+            value={msg}
+            onChange={(e) => setMsg(e.target.value)}
             type="text"
             placeholder="Type a message..."
             className="flex-1 px-4 py-5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button className="ml-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition">
+          <button
+            className="ml-4 px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition"
+            onClick={sendMessage}
+          >
             Send
           </button>
         </div>
