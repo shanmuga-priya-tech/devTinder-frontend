@@ -39,7 +39,7 @@ function Premium() {
 
             <div className="mt-6">
               <p className="text-3xl font-bold text-gray-900">
-                ₹500<span className="text-sm text-gray-500">/month</span>
+                ₹500<span className="text-sm text-gray-500">/year</span>
               </p>
               <button className="mt-4 w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-300">
                 Get Silver
@@ -72,7 +72,7 @@ function Premium() {
 
             <div className="mt-6">
               <p className="text-3xl font-bold text-white">
-                ₹700<span className="text-sm">/month</span>
+                ₹700<span className="text-sm">/year</span>
               </p>
               <button className="mt-4 w-full py-2 px-4 bg-white text-yellow-500 font-semibold rounded-lg hover:bg-gray-200 transition duration-300">
                 Get Gold

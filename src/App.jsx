@@ -17,6 +17,7 @@ import Cancellation from "./components/Cancellation";
 import ShippingandDelivery from "./components/ShippingandDelivery";
 import Contact from "./components/contact";
 import Premium from "./components/Premium";
+import Chat from "./components/Chat";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
               <Route path="/premium" element={<Premium />} />
+              <Route path="/message/:receiverId" element={<Chat />} />
               <Route path="/error" element={<Error />} />
             </Route>
             <Route path="/forgotpassword" element={<ForgotPassword />} />
