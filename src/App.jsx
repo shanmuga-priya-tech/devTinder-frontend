@@ -15,7 +15,7 @@ import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsandCondition from "./components/TermsandCondition";
 import Cancellation from "./components/Cancellation";
 import ShippingandDelivery from "./components/ShippingandDelivery";
-import Contact from "./components/contact";
+import Contact from "./components/Contact";
 import Premium from "./components/Premium";
 import Chat from "./components/Chat";
 
